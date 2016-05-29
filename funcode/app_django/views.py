@@ -1,12 +1,22 @@
+import random
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from app_django.models import DataBase
+from django.http import HttpResponse
+from app_django.models import MDjango
 
+def randquestionid():
+    return int(random.uniform(0, len(MDjango.objects.all())))
+
+nowquestionid = randquestionid()
 # Create your views here.
 def index(request):
-    first_question = DataBase.objects.all()[0].question
-    return render_to_response('index.html', {'question': first_question})
+    global nowquestionid
+    question = MDjango.objects.all()[nowquestionid].question
+    return render_to_response('index.html', {'question': question})
 
 def judge(request):
-    return request.GET['answer']
-    
+    global nowquestionid
+    answer = request.GET.get('answer', 'None')
+    if answer == MDjango.objects.all()[nowquestionid].solution:
+       nowquestionid = randquestionid()
+    return index(request)
