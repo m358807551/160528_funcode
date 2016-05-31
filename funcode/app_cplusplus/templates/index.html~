@@ -1,7 +1,0 @@
-<form action='/judge/' mothod='get'>
-  {{question}}
-  
-  <input type='textarea' name='answer'></input>
-  <input type='submit' value='提交'>
-
-</form>

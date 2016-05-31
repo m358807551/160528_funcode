@@ -12,7 +12,7 @@ nowquestionid = randquestionid()
 def index(request):
     global nowquestionid
     question = MCplusplus.objects.all()[nowquestionid].question
-    return render_to_response('index.html', {'question': question})
+    return render_to_response('index.html', {'app':'cplusplus', 'question': question})
 
 def judge(request):
     global nowquestionid
