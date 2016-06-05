@@ -38,8 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app_django',
     'app_rzrk',
-    'app_cplusplus'
-)
+    'app_cplusplus',
+    'app_vs2008',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

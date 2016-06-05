@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from app_rzrk.models import MRzrk
+from PyQt4.QtCore import *
 
 def randquestionid():
     return int(random.uniform(0, len(MRzrk.objects.all())))
@@ -16,7 +17,10 @@ def index(request):
 
 def judge(request):
     global nowquestionid
-    answer = request.GET.get('answer', 'None')
-    if answer == MRzrk.objects.all()[nowquestionid].solution:
+    answer = QString(request.GET.get('answer', 'None'))
+    answer = answer.replace(QRegExp('\s'), '')
+    solution = QString(MRzrk.objects.all()[nowquestionid].solution)
+    solution = solution.replace(QRegExp('\s'), '')
+    if answer == solution:
        nowquestionid = randquestionid()
     return index(request)
