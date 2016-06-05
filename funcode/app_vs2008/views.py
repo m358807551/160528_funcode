@@ -10,7 +10,7 @@ def randquestionid():
 
 nowquestionid = randquestionid()
 nQuestionSum = len(MVs.objects.all())
-nAnswerSum = 0
+nAnswerSum = 1 
 nRightSum = 0
 
 # Create your views here.
