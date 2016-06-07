@@ -2,14 +2,14 @@ import random
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from app_rzrk.models import MRzrk
+from app_vim.models import Mvim
 from PyQt4.QtCore import *
 
 def randquestionid():
-    return int(random.uniform(0, len(MRzrk.objects.all())))
+    return int(random.uniform(0, len(Mvim.objects.all())))
 
 nowquestionid = randquestionid()
-nQuestionSum = len(MRzrk.objects.all())
+nQuestionSum = len(Mvim.objects.all())
 nAnswerSum = 1 
 nRightSum = 0
 
@@ -19,8 +19,8 @@ def index(request):
     global nAnswerSum
     global nQuestionSum
     global nRightSum
-    question = MRzrk.objects.all()[nowquestionid].question
-    return render_to_response('index.html', {'app':'rzrk',
+    question = Mvim.objects.all()[nowquestionid].question
+    return render_to_response('index.html', {'app':'vim',
         'question': question,
         'nQuestionSum': nQuestionSum,
         'nAnswerSum': nAnswerSum,
@@ -35,7 +35,7 @@ def judge(request):
     nAnswerSum += 1
     answer = QString(request.GET.get('answer', 'None'))
     answer = answer.replace(QRegExp('\s'), '')
-    solution = QString(MRzrk.objects.all()[nowquestionid].solution)
+    solution = QString(Mvim.objects.all()[nowquestionid].solution)
     solution = solution.replace(QRegExp('\s'), '')
     if answer == solution:
         nowquestionid = randquestionid()
